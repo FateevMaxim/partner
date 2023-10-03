@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'checkbox' => ['required'],
+            'code' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'login' => ['required', 'string', 'max:16', 'unique:'.User::class],
@@ -45,11 +46,16 @@ class RegisteredUserController extends Controller
             return redirect()->back()->with('error', 'Неверный номер, пожалуйста, перепроверьте');
         }
 
+        $issetCode = User::query()->where('code', $request->code)->exists();
+        if ($issetCode){
+            return redirect()->back()->with('error', 'Данный код уже зарегистрирован!');
+        }
 
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'city' => $request->city,
+            'code' => $request->code,
             'login' => $request->login,
             'password' => $request->password,
         ]);
