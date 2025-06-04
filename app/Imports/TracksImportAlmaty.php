@@ -32,7 +32,7 @@ class TracksImportAlmaty implements ToModel, SkipsOnError
     public function model(array $row)
     {
         return TrackList::updateOrCreate(
-            ['track_code' => $row[0]],
+            ['track_code' => trim($row[0])],
             [
                 'to_almaty' => $this->date,
                 'status' => 'Получено на складе в Алматы',
