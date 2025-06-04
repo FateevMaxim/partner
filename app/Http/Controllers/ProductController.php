@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\TracksImport;
+use App\Imports\TracksImportAlmaty;
 use App\Models\ClientTrackList;
 use App\Models\Configuration;
 use App\Models\TrackList;
@@ -179,6 +180,11 @@ class ProductController extends Controller
     public function fileImport(Request $request)
     {
         Excel::import(new TracksImport($request['date']), $request->file('file')->store('temp'));
+        return back();
+    }
+    public function fileImportAlmaty(Request $request)
+    {
+        Excel::import(new TracksImportAlmaty($request['date']), $request->file('file')->store('temp'));
         return back();
     }
 

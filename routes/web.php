@@ -35,6 +35,7 @@ Route::get('/register-me', function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/file-import', [ProductController::class, 'fileImport'])->name('file-import');
+    Route::post('/file-import-almaty', [ProductController::class, 'fileImportAlmaty'])->name('file-import-almaty');
     Route::get('/archive', [DashboardController::class, 'archive'])->name('archive');
     Route::post('/china-product', [ProductController::class, 'addChina'])->name('china-product');
     Route::post('/almatyin-product', [ProductController::class, 'almatyIn'])->name('almatyin-product');
